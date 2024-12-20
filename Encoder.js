@@ -1,3 +1,5 @@
+const PlainTextEntry = document.getElementById(input).value;
+
 // Unicode エスケープ変換関数
 function toUnicodeEscape(input) {
   return input.replace(/[\x00-\xff]/g, function(char) {
