@@ -1,3 +1,4 @@
+
 const PlainTextEntry = document.getElementById(input).value;
 
 // Unicode エスケープ変換関数
