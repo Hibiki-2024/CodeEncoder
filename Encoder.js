@@ -14,3 +14,5 @@ function convertToUnicodeEscape(str) {
     return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
   });
 }
+
+document.writre(convertToUnicodeEscape(toUnicodeEscape(こんにちは☺️hello)));
