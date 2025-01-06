@@ -1,5 +1,5 @@
-
-const PlainTextEntry = document.getElementById(input).value;
+const PlainTextEntry = document.getElementById(input);
+const ConvertRun = document.getElementById(ConvertRun);
 
 // Unicode エスケープ変換関数
 function toUnicodeEscape(input) {
@@ -15,4 +15,47 @@ function convertToUnicodeEscape(str) {
   });
 }
 
-document.writre(convertToUnicodeEscape(toUnicodeEscape(こんにちは☺️hello)));
+//テスト用コード
+//document.writre(convertToUnicodeEscape(toUnicodeEscape(こんにちは☺️hello)));
+
+ConvertRun.addEventListener('click',() => {
+    const inputText = PlainTextEntry.value;
+    if (inputText.length === 0) {
+
+      alert("入力してください");
+      return;
+    }
+
+    // 診断結果表示エリアの作成
+    resultDivision.innerText = '';
+    
+    // headerDivision の作成
+    const headerDivision = document.createElement('div');
+    headerDivision.setAttribute('class', 'card-header text-bg-light');
+    headerDivision.innerText = '結果';
+
+    // bodyDivision の作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class', 'card-body');
+
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'card-text');
+
+    const ConvertedASCII = toUnicodeEscape(inputText);
+    const ConvertedUnicode = convertToUnicodeEscape(ConvertedASCII);
+   
+    // 以下の部分はしっかりと暗号化する際に使用する
+    const result = ConvertedUnicode;
+
+    paragraph.innerText = result;
+    bodyDivision.appendChild(paragraph);
+
+    // resultDivision に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute('class', 'card');
+
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
+  }
+
+
