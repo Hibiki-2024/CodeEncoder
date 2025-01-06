@@ -1,5 +1,5 @@
 const PlainTextEntry = document.getElementById(input);
-const ConvertRun = document.getElementById(ConvertRun);
+const Convert = document.getElementById(ConvertRun);
 
 // Unicode エスケープ変換関数
 function toUnicodeEscape(input) {
@@ -18,7 +18,7 @@ function convertToUnicodeEscape(str) {
 //テスト用コード
 //document.writre(convertToUnicodeEscape(toUnicodeEscape(こんにちは☺️hello)));
 
-ConvertRun.addEventListener('click',() => {
+Convert.addEventListener('click',() => {
     const inputText = PlainTextEntry.value;
     if (inputText.length === 0) {
 
