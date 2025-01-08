@@ -1,6 +1,7 @@
 'use strict';
 const PlainTextEntry = document.getElementById('input');
 const Convert = document.getElementById('ConvertRun');
+const resultDivision = document.getElementById('result-area');
 
 // Unicode エスケープ変換関数
 function toUnicodeEscape(input) {
@@ -27,7 +28,7 @@ Convert.addEventListener('click',() => {
       return;
     }
 
-    // 診断結果表示エリアの作成
+    // 結果表示エリアの作成
     resultDivision.innerText = '';
     
     // headerDivision の作成
@@ -58,5 +59,3 @@ Convert.addEventListener('click',() => {
     resultDivision.appendChild(headerDivision);
     resultDivision.appendChild(bodyDivision);
   }
-
-
