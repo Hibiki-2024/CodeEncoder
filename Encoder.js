@@ -1,5 +1,6 @@
-const PlainTextEntry = document.getElementById(input);
-const Convert = document.getElementById(ConvertRun);
+'use strict';
+const PlainTextEntry = document.getElementById('input');
+const Convert = document.getElementById('ConvertRun');
 
 // Unicode エスケープ変換関数
 function toUnicodeEscape(input) {
