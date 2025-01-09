@@ -17,13 +17,10 @@ function convertToUnicodeEscape(str) {
   });
 }
 
-//テスト用コード
-//document.writre(convertToUnicodeEscape(toUnicodeEscape(こんにちは☺️hello)));
-
 Convert.addEventListener('click',() => {
     const inputText = PlainTextEntry.value;
-    if (inputText.length === 0) {
 
+    if (inputText.length === 0) {
       alert("入力してください");
       return;
     }
@@ -58,4 +55,4 @@ Convert.addEventListener('click',() => {
     // headerDivision と bodyDivision を resultDivision に差し込む
     resultDivision.appendChild(headerDivision);
     resultDivision.appendChild(bodyDivision);
-  }
+  })
