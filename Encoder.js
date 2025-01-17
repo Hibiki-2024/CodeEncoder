@@ -3,19 +3,29 @@ const PlainTextEntry = document.getElementById('input');
 const Convert = document.getElementById('ConvertRun');
 const resultDivision = document.getElementById('result-area');
 
-// Unicode エスケープ変換関数
-function toUnicodeEscape(input) {
-  return input.replace(/[\x00-\xff]/g, function(char) {
-    return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
-  });
+// Unicode エスケープ変換関数 ChatGPT製
+function convertToUnicodeEscape(input) {
+  // 入力文字列全体をループして文字コードを変換
+  return input.split('').map(char => {
+    const codePoint = char.codePointAt(0);
+    return '\\u' + ('0000' + codePoint.toString(16)).slice(-4);
+  }).join('');
 }
 
-// 非ASCII文字をUnicodeエスケープに変換する関数
-function convertToUnicodeEscape(str) {
-  return str.replace(/[^\x00-\x7F]/g, function(char) {
-    return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
-  });
-}
+//試行錯誤跡地
+// // Unicode エスケープ変換関数
+// function toUnicodeEscape(input) {
+//   return input.replace(/[\x00-\xff]/g, function(char) {
+//     return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
+//   });
+// }
+
+// // 非ASCII文字をUnicodeエスケープに変換する関数
+// function convertToUnicodeEscape(str) {
+//   return str.replace(/[^\x00-\x7F]/g, function(char) {
+//     return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
+//   });
+// }
 
 Convert.addEventListener('click',() => {
     const inputText = PlainTextEntry.value;
@@ -40,8 +50,7 @@ Convert.addEventListener('click',() => {
     const paragraph = document.createElement('p');
     paragraph.setAttribute('class', 'card-text');
 
-    const ConvertedASCII = toUnicodeEscape(inputText);
-    const ConvertedUnicode = convertToUnicodeEscape(ConvertedASCII);
+    const ConvertedUnicode = convertToUnicodeEscape(inputText);
    
     // 以下の部分はしっかりと暗号化する際に使用する
     const result = ConvertedUnicode;
