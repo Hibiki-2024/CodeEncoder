@@ -1,4 +1,6 @@
 'use strict';
+
+// 入力フィールドとボタン、結果表示エリアの取得
 const PlainTextEntry = document.getElementById('input');
 const Convert = document.getElementById('ConvertRun');
 const resultDivision = document.getElementById('result-area');
@@ -12,56 +14,46 @@ function convertToUnicodeEscape(input) {
   }).join('');
 }
 
-//試行錯誤跡地
-// // Unicode エスケープ変換関数
-// function toUnicodeEscape(input) {
-//   return input.replace(/[\x00-\xff]/g, function(char) {
-//     return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
-//   });
-// }
+// ボタンのクリックイベントリスナーを設定
+Convert.addEventListener('click', () => {
+  // 入力テキストの取得
+  const inputText = PlainTextEntry.value;
 
-// // 非ASCII文字をUnicodeエスケープに変換する関数
-// function convertToUnicodeEscape(str) {
-//   return str.replace(/[^\x00-\x7F]/g, function(char) {
-//     return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
-//   });
-// }
+  // 入力が空の場合はアラートを表示して処理を中断
+  if (inputText.length === 0) {
+    alert("入力してください");
+    return;
+  }
 
-Convert.addEventListener('click',() => {
-    const inputText = PlainTextEntry.value;
+  // 結果表示エリアの初期化
+  resultDivision.innerText = '';
 
-    if (inputText.length === 0) {
-      alert("入力してください");
-      return;
-    }
+  // headerDivision の作成
+  const headerDivision = document.createElement('div');
+  headerDivision.setAttribute('class', 'card-header text-bg-light');
+  headerDivision.innerText = '結果';
 
-    // 結果表示エリアの作成
-    resultDivision.innerText = '';
-    
-    // headerDivision の作成
-    const headerDivision = document.createElement('div');
-    headerDivision.setAttribute('class', 'card-header text-bg-light');
-    headerDivision.innerText = '結果';
+  // bodyDivision の作成
+  const bodyDivision = document.createElement('div');
+  bodyDivision.setAttribute('class', 'card-body');
 
-    // bodyDivision の作成
-    const bodyDivision = document.createElement('div');
-    bodyDivision.setAttribute('class', 'card-body');
+  // 結果表示用の段落を作成
+  const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'card-text');
 
-    const paragraph = document.createElement('p');
-    paragraph.setAttribute('class', 'card-text');
+  // 入力テキストを Unicode エスケープに変換
+  const ConvertedUnicode = convertToUnicodeEscape(inputText);
 
-    const ConvertedUnicode = convertToUnicodeEscape(inputText);
-   
     // 以下の部分はしっかりと暗号化する際に使用する
     const result = ConvertedUnicode;
 
     paragraph.innerText = result;
-    bodyDivision.appendChild(paragraph);
+  bodyDivision.appendChild(paragraph);
 
-    // resultDivision に Bootstrap のスタイルを適用する
-    resultDivision.setAttribute('class', 'card');
+  // resultDivision に Bootstrap のスタイルを適用
+  resultDivision.setAttribute('class', 'card');
 
-    // headerDivision と bodyDivision を resultDivision に差し込む
-    resultDivision.appendChild(headerDivision);
-    resultDivision.appendChild(bodyDivision);
-  })
+  // headerDivision と bodyDivision を resultDivision に追加
+  resultDivision.appendChild(headerDivision);
+  resultDivision.appendChild(bodyDivision);
+});
